@@ -9,6 +9,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+$hide = false;
+if($_GET["print-order-type"] == 'packaging-slip')
+	$hide = true;
 ?>
 
 	<div class="order-branding">
@@ -36,14 +39,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 		no-shipping-address<?php endif; ?>">
 		<div class="billing-address">
-			<h3><?php esc_attr_e( 'Billing Address', 'woocommerce-delivery-notes' ); ?></h3>
+			<h3><?php if(!$hide) esc_attr_e( 'Billing Address', 'woocommerce-delivery-notes' ); ?></h3>
 			<address>
 
 				<?php
 				if ( ! $order->get_formatted_billing_address() ) {
 					esc_attr_e( 'N/A', 'woocommerce-delivery-notes' );
 				} else {
-					echo wp_kses_post( apply_filters( 'wcdn_address_billing', $order->get_formatted_billing_address(), $order ) );
+					if(!$hide) echo wp_kses_post( apply_filters( 'wcdn_address_billing', $order->get_formatted_billing_address(), $order ) );
 				}
 				?>
 
@@ -93,9 +96,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<thead>
 				<tr>
 					<th class="head-name"><span><?php esc_attr_e( 'Product', 'woocommerce-delivery-notes' ); ?></span></th>
-					<th class="head-item-price"><span><?php esc_attr_e( 'Price', 'woocommerce-delivery-notes' ); ?></span></th>
+					<th class="head-item-price"><span><?php if(!$hide) esc_attr_e( 'Price', 'woocommerce-delivery-notes' ); ?></span></th>
 					<th class="head-quantity"><span><?php esc_attr_e( 'Quantity', 'woocommerce-delivery-notes' ); ?></span></th>
-					<th class="head-price"><span><?php esc_attr_e( 'Total', 'woocommerce-delivery-notes' ); ?></span></th>
+					<th class="head-price"><span><?php if(!$hide) esc_attr_e( 'Total', 'woocommerce-delivery-notes' ); ?></span></th>
 				</tr>
 			</thead>
 
@@ -204,13 +207,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<?php do_action( 'wcdn_order_item_after', $product, $order, $item ); ?>
 							</td>
 							<td class="product-item-price">
-								<span><?php echo wp_kses_post( wcdn_get_formatted_item_price( $order, $item ) ); ?></span>
+								<span><?php if(!$hide) echo wp_kses_post( wcdn_get_formatted_item_price( $order, $item ) ); ?></span>
 							</td>
 							<td class="product-quantity">
 								<span><?php echo esc_attr( apply_filters( 'wcdn_order_item_quantity', $item['qty'], $item ) ); ?></span>
+								<?php if(!$hide) if($item->get_meta( '_original_qty', true ) != $item['qty']) {
+									?><br><span style="color:red;font-size:smaller"><s><?php echo $item->get_meta( '_original_qty', true ); ?></s><span><br>
+								<?php
+								}
+								
+								
+								?>
 							</td>
 							<td class="product-price">
-								<span><?php echo wp_kses_post( $order->get_formatted_line_subtotal( $item ) ); ?></span>
+								<span><?php if(!$hide) echo wp_kses_post( $order->get_formatted_line_subtotal( $item, "Incl" ) ); ?></span>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -220,7 +230,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tfoot>
 				<?php
 				$totals_arr = $order->get_order_item_totals();
-				if ( $totals_arr ) :
+				if(!$hide) if ( $totals_arr ) :
 
 					foreach ( $totals_arr as $total ) :
 						?>

@@ -2,15 +2,14 @@
 /**
  * Print invoices & delivery notes for WooCommerce orders.
  *
- * Plugin Name: Print Invoice & Delivery Notes for WooCommerce
- * Plugin URI: https://www.tychesoftwares.com/
+ * Plugin Name: Print Invoice & Delivery Notes for WooCommerce modified
  * Description: Print Invoices & Delivery Notes for WooCommerce Orders.
  * Version: 4.5.5
  * Author: Tyche Softwares
  * Author URI: https://www.tychesoftwares.com/
  * License: GPLv3 or later
  * License URI: http://www.opensource.org/licenses/gpl-license.php
- * Text Domain: woocommerce-delivery-notes
+ * Text Domain: woocommerce-delivery-notes-modified
  * Domain Path: /languages
  * Requires PHP: 5.6
  * WC requires at least: 3.0.0
@@ -45,6 +44,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+function action_woocommerce_new_order_item( $item_id, $item, $order_id ) { 
+    // make action magic happen here... 
+	$item->update_meta_data( '_original_qty', $item->get_quantity() );
+	$item->save();
+}; 
+         
+// add the action 
+add_action( 'woocommerce_new_order_item', 'action_woocommerce_new_order_item', 10, 3 ); 
 
 if ( ! class_exists( 'WooCommerce_Delivery_Notes' ) ) {
 	include_once 'includes/class-woocommerce-delivery-notes.php';

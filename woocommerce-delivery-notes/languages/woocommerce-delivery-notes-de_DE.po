@@ -91,6 +91,41 @@ msgstr "Lieferscheine erstellt."
 msgid "Show \"Print Delivery Note\" button"
 msgstr ""
 
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Packaging Slip"
+msgstr "Kommissionierschein"
+
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Packaging Slips"
+msgstr "Kommissionierscheine"
+
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Print Packaging Slip"
+msgstr "Drucke Kommissionierschein"
+
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Print Packaging Slips"
+msgstr "Drucke Kommissionierscheine"
+
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Packaging Slip"
+msgstr "Kommissionierschein erstellt"
+
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Packaging Slips"
+msgstr "Kommissionierscheine erstellt"
+
+# @ woocommerce-delivery-notes
+#: includes/class-wcdn-print.php:57
+msgid "Show \"Print Packaging Slip\" button"
+msgstr "Zeige \"Drucke Kommissionierschein\" Schaltfläche"
+
 #: includes/class-wcdn-print.php:63
 msgid "Receipt"
 msgstr "Beleg"

@@ -109,6 +109,21 @@ if ( ! class_exists( 'WCDN_Print' ) ) {
 						)
 					),
 					apply_filters(
+						'wcdn_template_registration_packaging_slip',
+						array(
+							'type'   => 'packaging-slip',
+							'labels' => array(
+								'name'           => __( 'Kommissionierschein', 'woocommerce-delivery-notes' ),
+								'name_plural'    => __( 'Kommissionierscheine', 'woocommerce-delivery-notes' ),
+								'print'          => __( 'Kommissionierschein drucken', 'woocommerce-delivery-notes' ),
+								'print_plural'   => __( 'Kommissionierscheine drucken', 'woocommerce-delivery-notes' ),
+								'message'        => __( 'Kommissionierschein erstellt.', 'woocommerce-delivery-notes' ),
+								'message_plural' => __( 'Kommissionierscheine erstellt.', 'woocommerce-delivery-notes' ),
+								'setting'        => __( 'Zeige "Kommissionierschein drucken"-Button', 'woocommerce-delivery-notes' ),
+							),
+						)
+					),
+					apply_filters(
 						'wcdn_template_registration_delivery_note',
 						array(
 							'type'   => 'delivery-note',
@@ -123,6 +138,7 @@ if ( ! class_exists( 'WCDN_Print' ) ) {
 							),
 						)
 					),
+					
 					apply_filters(
 						'wcdn_template_registration_receipt',
 						array(
